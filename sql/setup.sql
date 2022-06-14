@@ -35,9 +35,11 @@ VALUES
 INSERT INTO authors (dob, pob, name)
 VALUES
   ('04/28/1926', 'Monroeville, AL', 'Nelle Harper Lee'), 
-  ('08/01/1819', 'New York, NY', 'Herman Melville');
+  ('08/01/1819', 'New York, NY', 'Herman Melville'),
+  ('04/28/1926', 'Monroeville, AL', 'Harper Lee (Second one for testing)');
 
 INSERT INTO authors_to_books (book_id, author_id)
 VALUES
-  (1, 1), 
+  (1, 1),
+  (1, 3), 
   (2, 2);
