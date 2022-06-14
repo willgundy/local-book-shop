@@ -9,6 +9,7 @@ DROP TABLE IF EXISTS books;
 CREATE TABLE books (
   id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
   title VARCHAR NOT NULL,
+  publisher VARCHAR,
   released INT NOT NULL
 );
 
@@ -27,10 +28,10 @@ CREATE TABLE authors_to_books (
   FOREIGN KEY (author_id) REFERENCES authors(id)
 );
 
-INSERT INTO books (title, released)
+INSERT INTO books (title, publisher, released)
 VALUES
-  ('To Kill A Mockingbird', 1960), 
-  ('Moby Dick', 1851);
+  ('To Kill A Mockingbird', '', 1960), 
+  ('Moby Dick', '', 1851);
 
 INSERT INTO authors (dob, pob, name)
 VALUES
