@@ -28,14 +28,14 @@ describe('book routes', () => {
   it("POST /book should create a new book with an associated author", async () => {
     const resp = await request(app)
       .post("/books")
-      .send({ title: 'bookie', publisher: 'dunno', released: 1960, authorIds: [1, 2] });
+      .send({ title: 'bookie', publisher: 'dunno', released: 1960, authorIds: [1, 2], newAuthor: { dob: '01/01/2022', pob: 'Bend, OR', name: 'Testing New Author' } });
     expect(resp.status).toBe(200);
     expect(resp.body.title).toEqual('bookie');
     expect(resp.body.publisher).toEqual('dunno');
     expect(resp.body.released).toEqual(1960);
   
     const newBook = await request(app).get(`/books/${resp.body.id}`);
-    expect(newBook.body.authors.length).toBe(2);
+    expect(newBook.body.authors.length).toBe(3);
   });
 
   afterAll(() => {
