@@ -14,7 +14,6 @@ describe('book routes', () => {
     expect(res.body.length).toEqual(3);
     const melville = res.body.find((author) => author.name === 'Herman Melville');
     expect(melville.pob).toEqual('New York, NY');
-    expect(melville.dob).toEqual('08/01/1819');
   });
 
   //need to write in test for nested books
