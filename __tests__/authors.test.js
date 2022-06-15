@@ -21,23 +21,20 @@ describe('book routes', () => {
   it('should return a single books details', async () => {
     const res = await request(app).get('/authors/1');
     expect(res.status).toBe(200);
-    console.log(res.body);
     expect(res.body.name).toEqual('Nelle Harper Lee');
     expect(res.body.pob).toEqual('Monroeville, AL');
   });
 
-  // it("POST /book should create a new book with an associated author", async () => {
-  //   const resp = await request(app)
-  //     .post("/books")
-  //     .send({ title: 'bookie', publisher: 'dunno', released: 1960, authorIds: [1, 2] });
-  //   expect(resp.status).toBe(200);
-  //   expect(resp.body.title).toEqual('bookie');
-  //   expect(resp.body.publisher).toEqual('dunno');
-  //   expect(resp.body.released).toEqual(1960);
+  it("POST /author should create a new author with an associated list of books", async () => {
+    const resp = await request(app)
+      .post("/authors")
+      .send({ dob: '01/01/2021', pob: 'Portland, OR', name: 'Some Author', bookIds: [1, 2] });
+    expect(resp.status).toBe(200);
+    expect(resp.body.name).toEqual('Some Author');
   
-  //   const newBook = await request(app).get(`/books/${resp.body.id}`);
-  //   expect(newBook.body.authors.length).toBe(2);
-  // });
+    const newAuthor = await request(app).get(`/authors/${resp.body.id}`);
+    expect(newAuthor.body.books.length).toBe(2);
+  });
 
   afterAll(() => {
     pool.end();
